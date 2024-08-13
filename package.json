@@ -4,7 +4,7 @@
   "description": "## Objective",
   "main": "index.js",
   "scripts": {
-    "server": "tsnd --inspect -- src/index.ts",
+    "server": "NODE_ENV=development tsnd --inspect -- src/index.ts",
     "setup": "npm i",
     "js": "tsc -w src/public/ts/*.ts --outDir src/public/js ",
     "css": "sass -w src/public/sass:src/public/css",
