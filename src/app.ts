@@ -4,6 +4,7 @@ import path from "path";
 import expressEjsLayouts from "express-ejs-layouts";
 import { router as indexRouter } from "./routes/indexRoutes";
 import { router as authRouter } from "./routes/authRoutes";
+import { router as chatsRouter } from "./routes/chatsRoutes";
 export const app = express();
 const baseUrl = "/api/v1";
 
@@ -25,6 +26,7 @@ app.use(cors());
 // app.use(`${baseUrl}`, productsRouter);
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
+app.use("/chats", chatsRouter);
 
 app.all("*", (req: Request, res: Response) => {
   res.status(404).json({ error: "Not Found Route" });
