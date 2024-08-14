@@ -8,7 +8,8 @@
     <title>Pad-thai</title>
   </head>
   <body>
-    <%- include('../partials/header') %>
+    <%- include('../partials/header', { title: typeof title !== 'undefined' ?
+    title : 'default' }) %>
 
     <main><%- body %></main>
   </body>
