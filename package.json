@@ -4,11 +4,13 @@
   "description": "## Objective",
   "main": "index.js",
   "scripts": {
+    "server2": "cross-env NODE_ENV=development tsnd --inspect -- src/index.ts",
     "server": "NODE_ENV=development tsnd --inspect -- src/index.ts",
     "setup": "npm i",
     "js": "tsc -w src/public/ts/*.ts --outDir src/public/js ",
     "css": "sass -w src/public/sass:src/public/css",
-    "dev": "concurrently \"npm run js\" \"npm run css\" \"npm run server\""
+    "dev": "concurrently \"npm run js\" \"npm run css\" \"npm run server\"",
+    "dev2": "concurrently \"npm run js\" \"npm run css\" \"npm run server2\""
   },
   "keywords": [],
   "author": "",
@@ -28,6 +30,7 @@
     "@types/node": "^22.2.0",
     "browser-sync": "^3.0.2",
     "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
     "sass": "^1.77.8",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.5.4"
