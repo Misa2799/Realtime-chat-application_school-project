@@ -1,13 +1,13 @@
 import { model, Schema } from "mongoose";
 
-type chatType = {
+export type chatType = {
   users: Schema.Types.ObjectId[];
   categories: Schema.Types.ObjectId[];
   contents: Schema.Types.ObjectId[];
   name: string;
 };
 
-const chatSchema = new Schema<chatType>({
+export const chatSchema = new Schema<chatType>({
   users: {
     type: [Schema.Types.ObjectId],
     ref: "User", // based on model
@@ -29,4 +29,4 @@ const chatSchema = new Schema<chatType>({
   },
 });
 
-const Chat = model<chatType>("Chat", chatSchema);
+export const Chat = model<chatType>("Chat", chatSchema);
