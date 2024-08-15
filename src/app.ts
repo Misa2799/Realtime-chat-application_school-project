@@ -5,8 +5,29 @@ import expressEjsLayouts from "express-ejs-layouts";
 import { router as indexRouter } from "./routes/indexRoutes";
 import { router as authRouter } from "./routes/authRoutes";
 import { router as chatsRouter } from "./routes/chatsRoutes";
+import { Server } from "socket.io";
+import { createServer } from "http";
+
 export const app = express();
 const baseUrl = "/api/v1";
+
+// socket.io
+const httpServer = createServer(app);
+const io = new Server(httpServer);
+io.on("connection", (socket) => {
+  cors: {
+    origin: "*";
+  }
+});
+
+io.on("connection", (socket) => {
+  console.log("User connected");
+
+  socket.on("message", (message) => {
+    console.log("message", message);
+    io.emit("message", `${socket.id} said ${message}`);
+  });
+});
 
 // setup ejs
 app.set("view engine", "ejs");
