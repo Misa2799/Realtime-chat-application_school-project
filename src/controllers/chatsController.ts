@@ -20,25 +20,28 @@ export const renderChatsPage = async (req: Request, res: Response) => {
   }
 };
 
+export const redirectChat = async (req: Request, res: Response) => {
+  const { chatroom } = req.body;
+
+  res.redirect(`/chats/${chatroom}`);
+};
+
 export const renderChatroomPage = async (req: Request, res: Response) => {
-  const { category, chatroom } = req.body;
-  if (!category || !chatroom) {
-    res.status(400).render("pages/chats/chat", {
-      error: "Please chose Category and Chatroom",
-      title: "chats",
-    });
-  }
+  const { id } = req.params;
+
   try {
-    const chat = await Chat.findById(chatroom)
+    const chat = await Chat.findById(id)
       .populate("users", "", User)
       .populate("categories")
       .populate("contents", "", Content)
       .lean()
       .exec();
 
-    res
-      .status(200)
-      .render("pages/chats/chatroom", { error: null, title: "chatroom", chat });
+    if (!chat) {
+      res.status(404).render("pages/not-found");
+    }
+
+    res.status(200).render(`pages/chats/chatroom`, { chat });
   } catch (error) {
     console.error("cannot enter the room", error);
     res.json({ message: "error" });
