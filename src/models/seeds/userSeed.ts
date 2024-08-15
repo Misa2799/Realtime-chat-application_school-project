@@ -4,9 +4,14 @@ import { User } from "../userSchema";
 
 const userData = [
   {
-    name: "Karen",
-    email: "Karen@example.com",
-    password: "pw456",
+    name: "user1",
+    email: "user1@example.com",
+    password: "pw123",
+  },
+  {
+    name: "user2",
+    email: "user2@example.com",
+    password: "pw123",
   },
 ];
 

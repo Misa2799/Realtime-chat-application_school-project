@@ -5,9 +5,15 @@ import { User } from "../userSchema";
 
 const chatData = [
   {
-    users: [new Types.ObjectId("66be26bf310dafc93459dc1c")],
-    categories: ["66bd1accc9eefdc21a5d674b"],
-    contents: ["66bd22763f3b0c5faae05085", "66bd2281746722f7ab6ec04e"],
+    users: [
+      new Types.ObjectId("66be30c61a4218de3999eaed"),
+      new Types.ObjectId("66be30c61a4218de3999eaec"),
+    ],
+    categories: [new Types.ObjectId("66bda42a2ba998eed36e3aeb")],
+    contents: [
+      new Types.ObjectId("66be3156a7756ff9e26ec724"),
+      new Types.ObjectId("66be3156a7756ff9e26ec725"),
+    ],
     name: "room1",
   },
   {
@@ -39,13 +45,12 @@ const chatData = [
 mongoose.connect(dbUrl!).then(async (r) => {
   try {
     await Chat.deleteMany();
-
-    //content
     const insertedChat = await Chat.insertMany(chatData);
     console.log("content data inserted:", insertedChat);
   } catch (error) {
     console.log(error);
   } finally {
     mongoose.disconnect();
+    process.exit();
   }
 });
