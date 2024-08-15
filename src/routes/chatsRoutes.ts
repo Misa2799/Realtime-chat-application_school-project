@@ -5,15 +5,15 @@ import {
   renderChatsPage,
 } from "../controllers/chatsController";
 import { Content } from "../models/contentSchema";
+import { validateUser } from "../middleware/validate-user";
 
 export const router = Router();
 
 // http://localhost:3000/chats
-router.get("/", renderChatsPage);
-
+router.get("/", validateUser, renderChatsPage);
+router.post("/", validateUser, renderChatroomPage);
 // http://localhost:3000/chats
 router.post("/", redirectChat);
-
 // http://localhost:3000/chats/:id
 router.get("/:id", renderChatroomPage);
 

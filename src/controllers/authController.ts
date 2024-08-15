@@ -16,7 +16,7 @@ export const loginRender = (req: Request, res: Response) => {
 };
 
 export const logout = (req: Request, res: Response) => {
-  // req.session = null;
+  req.session = null;
   res.status(200).redirect("/auth/login");
 };
 

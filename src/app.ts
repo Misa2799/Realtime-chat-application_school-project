@@ -54,14 +54,10 @@ app.use(
     maxAge: 1000 * 60 * 30,
   })
 );
-app.use((req, res, next) => {
-  req.app.locals = {
-    currentUser: req.session?.currentUser,
-    error: null,
-    title: null,
-  };
-  next();
-});
+// app.use((req: Request,res: Response,next: NextFunction)=>{
+//   console.log(req.session);
+//   next();
+// })
 
 // app.use(`${baseUrl}`, productsRouter);
 app.use("/", indexRouter);
