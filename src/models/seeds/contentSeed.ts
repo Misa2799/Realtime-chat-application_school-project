@@ -4,8 +4,8 @@ import { Content } from "../contentSchema";
 
 const contentData = [
   {
-    userId: "66bd1b3bc9eefdc21a5d674e",
-    content: "first message",
+    userId: "66bda4070d87c1aba8e11521",
+    content: "second message",
   },
 ];
 

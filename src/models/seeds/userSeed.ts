@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 import { dbUrl } from "../..";
-import User from "../userSchema";
+import { User } from "../userSchema";
 
 const userData = [
   {
-    name: "John",
-    email: "john@example.com",
-    password: "pw123",
+    name: "Karen",
+    email: "Karen@example.com",
+    password: "pw456",
   },
 ];
 
