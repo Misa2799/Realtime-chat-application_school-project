@@ -13,11 +13,13 @@ const userData = [
 mongoose.connect(dbUrl!).then(async (r) => {
   try {
     //content
+    await User.deleteMany();
     const insertedUser = await User.insertMany(userData);
     console.log("user data inserted:", insertedUser);
   } catch (error) {
     console.log(error);
   } finally {
     mongoose.disconnect();
+    process.exit();
   }
 });
