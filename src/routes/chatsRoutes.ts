@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
 import {
+  redirectChat,
   renderChatroomPage,
   renderChatsPage,
 } from "../controllers/chatsController";
@@ -36,3 +37,6 @@ router.post("/:id", async (req: Request, res: Response) => {
     console.error("error", error);
   }
 });
+router.post("/", redirectChat);
+
+router.get("/:id", renderChatroomPage);
