@@ -8,9 +8,14 @@ import { Content } from "../models/contentSchema";
 
 export const router = Router();
 
+// http://localhost:3000/chats
 router.get("/", renderChatsPage);
 
-router.post("/", renderChatroomPage);
+// http://localhost:3000/chats
+router.post("/", redirectChat);
+
+// http://localhost:3000/chats/:id
+router.get("/:id", renderChatroomPage);
 
 // router.post("/:id", (req, res) => {
 //   console.log("id", req.params);
@@ -37,6 +42,3 @@ router.post("/:id", async (req: Request, res: Response) => {
     console.error("error", error);
   }
 });
-router.post("/", redirectChat);
-
-router.get("/:id", renderChatroomPage);
