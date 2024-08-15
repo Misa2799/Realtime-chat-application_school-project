@@ -12,7 +12,7 @@ export const app = express();
 const baseUrl = "/api/v1";
 
 // socket.io
-const httpServer = createServer(app);
+export const httpServer = createServer(app);
 const io = new Server(httpServer);
 io.on("connection", (socket) => {
   cors: {
