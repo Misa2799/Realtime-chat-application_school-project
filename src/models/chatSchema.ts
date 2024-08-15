@@ -1,4 +1,7 @@
 import { model, Schema } from "mongoose";
+import { User } from "./userSchema";
+import { Category } from "./categorySchema";
+import { Content } from "./contentSchema";
 
 export type chatType = {
   users: Schema.Types.ObjectId[];
@@ -8,21 +11,26 @@ export type chatType = {
 };
 
 export const chatSchema = new Schema<chatType>({
-  users: {
-    type: [Schema.Types.ObjectId],
-    ref: "User", // based on model
-    required: true,
-  },
-  categories: {
-    type: [Schema.Types.ObjectId],
-    ref: "Category", // based on model
-    required: true,
-  },
-  contents: {
-    type: [Schema.Types.ObjectId],
-    ref: "Content", // based on model
-    required: true,
-  },
+  users: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  categories: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
+    },
+  ],
+  contents: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Content",
+      required: true,
+    },
+  ],
   name: {
     type: String,
     required: true,
