@@ -30,6 +30,8 @@ export const login = async (req: Request, res: Response) => {
     return;
   }
 
+  req.session = { currentUser: { id: user.id, name: user.name, email } };
+
   res.redirect("/chats");
 
 };
