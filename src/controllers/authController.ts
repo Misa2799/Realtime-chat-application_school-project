@@ -20,11 +20,22 @@ export const logout = (req: Request, res: Response) => {
   res.status(200).redirect("/auth/login");
 };
 
+export const login = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    res.render("pages/auth/login", { title: "Login", error: "Invalid email or password" });
+    return;
+  }
+
+  res.redirect("/chats");
+
+};
+
 export const register = async (req: Request, res: Response)=>{
   const { name, email, password } = req.body;
-
-  //check User email from Data Base
-  // const user = User.find((userSchema) => userSchema.email === email);
 
   const salt = await bcrypt.genSalt();
   const hashedPassword = await bcrypt.hash(password, salt);

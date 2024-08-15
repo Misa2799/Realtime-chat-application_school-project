@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { loginRender, logout, register, registerRender } from "../controllers/authController";
+import { login, loginRender, logout, register, registerRender } from "../controllers/authController";
 import { User, } from "../models/userSchema";
 
 export const router = Router();
@@ -10,6 +10,7 @@ router.get("/register", registerRender);
 router.post("/register", register);
 
 router.get("/login", loginRender);
+router.post("/login", login);
 
 router.get("/logout", logout);
 
