@@ -3,9 +3,10 @@ import {
   renderChatroomPage,
   renderChatsPage,
 } from "../controllers/chatsController";
+import { validateUser } from "../middleware/validate-user";
 
 export const router = Router();
 
-router.get("/", renderChatsPage);
+router.get("/",validateUser,  renderChatsPage);
 
-router.post("/", renderChatroomPage);
+router.post("/", validateUser,  renderChatroomPage);
