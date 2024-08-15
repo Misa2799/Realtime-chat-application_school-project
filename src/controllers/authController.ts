@@ -1,12 +1,14 @@
+import bcrypt from "bcrypt"
 import { Request, Response } from "express";
+import { User } from "../models/userSchema";
 
 // link to register
-export const register = (req: Request, res: Response) => {
+export const registerRender = (req: Request, res: Response) => {
   res.status(200).render("pages/auth/register", { error: null, title: "register" });
 };
 
 //link to login
-export const login = (req: Request, res: Response) => {
+export const loginRender = (req: Request, res: Response) => {
   // if (req.session && req.session.user) {
   //   return res.status(400).render("pages/auth/login", { error: "Please logout" });
   // }
@@ -16,4 +18,33 @@ export const login = (req: Request, res: Response) => {
 export const logout = (req: Request, res: Response) => {
   // req.session = null;
   res.status(200).redirect("/auth/login");
+};
+
+export const register = async (req: Request, res: Response)=>{
+  const { name, email, password } = req.body;
+
+  //check User email from Data Base
+  // const user = User.find((userSchema) => userSchema.email === email);
+
+  const salt = await bcrypt.genSalt();
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+  const userData = [
+      {
+        name,
+        email,
+        password: hashedPassword
+      },
+    ];
+
+    try {
+      const newUser = await User.insertMany(userData);
+      
+      res.status(200).render("pages/auth/login",{title: "login", error: null});
+      
+    } catch (error) {
+      res.status(404).render("pages/auth/register", {title: "register", error: "User already existed, Please use other Email"});
+      
+    }
+
 };
