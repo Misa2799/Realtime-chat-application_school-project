@@ -3,6 +3,7 @@ import { User } from "../models/userSchema";
 import { Category } from "../models/categorySchema";
 import { Chat } from "../models/chatSchema";
 import { Types } from "mongoose";
+import { Content } from "../models/contentSchema";
 
 // Link to the chats page
 export const renderChatsPage = async (req: Request, res: Response) => {
@@ -28,13 +29,14 @@ export const renderChatroomPage = async (req: Request, res: Response) => {
       title: "chats",
     });
   }
-
-  // const chatroomId = new mongoose.Types.ObjectId(chatroom);
-  // const categoryId = new mongoose.Types.ObjectId(category);
   try {
-    // const chat = await Chat.findById(chatroom);
-    // console.log(chat!.users);
-    const chat = await Chat.findById(chatroom).populate({ path: "users" });
+    const chat = await Chat.findById(chatroom)
+      .populate("users", "", User)
+      .populate("categories")
+      .populate("contents", "", Content)
+      .lean()
+      .exec();
+
     console.log(chat);
 
     res
