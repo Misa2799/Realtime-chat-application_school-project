@@ -11,11 +11,12 @@ export const router = Router();
 
 // http://localhost:3000/chats
 router.get("/", validateUser, renderChatsPage);
-router.post("/", validateUser, renderChatroomPage);
+
 // http://localhost:3000/chats
 router.post("/", redirectChat);
+
 // http://localhost:3000/chats/:id
-router.get("/:id", renderChatroomPage);
+router.get("/:id", validateUser, renderChatroomPage);
 
 // router.post("/:id", (req, res) => {
 //   console.log("id", req.params);
