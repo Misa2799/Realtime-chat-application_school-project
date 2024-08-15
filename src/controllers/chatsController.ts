@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { User } from "../models/userSchema";
 import { Category } from "../models/categorySchema";
 import { Chat } from "../models/chatSchema";
-import { Types } from "mongoose";
 import { Content } from "../models/contentSchema";
 
 // Link to the chats page
@@ -37,12 +36,9 @@ export const renderChatroomPage = async (req: Request, res: Response) => {
       .lean()
       .exec();
 
-    console.log(chat);
-
     res
       .status(200)
-      .render("pages/chats/chatroom", { error: null, title: "chatroom" });
-    // we should pass the variables about categories and chats from DB or hard-coded
+      .render("pages/chats/chatroom", { error: null, title: "chatroom", chat });
   } catch (error) {
     console.error("cannot enter the room", error);
     res.json({ message: "error" });
