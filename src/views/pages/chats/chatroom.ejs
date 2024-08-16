@@ -10,9 +10,11 @@
     </ul>
   </div>
   <div class="messageContainer">
-    <form action="/chats/:id" method="POST">
+    <form action="/chats/<%= chat._id%>" method="POST">
       <input class="messageContainer__input" type="text" name="content" />
       <button class="messageContainer__submit" type="submit">Send</button>
     </form>
   </div>
 </div>
+
+<p>chatroomid;<%= chat._id %></p>

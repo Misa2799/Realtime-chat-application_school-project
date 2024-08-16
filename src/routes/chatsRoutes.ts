@@ -27,6 +27,7 @@ router.post("/:id", async (req: Request, res: Response) => {
       userId: userId,
       content: req.body.content,
     });
+    console.log(req.body.content);
 
     const newContent = await content.save();
 
@@ -38,9 +39,12 @@ router.post("/:id", async (req: Request, res: Response) => {
 
     chat.contents.push(newContent.id);
     await chat.save();
-
-    res.status(200).render("pages/chats/chatroom", { chat });
+    // res.status(200).render("pages/chats/chatroom", { chat });
+    // res.status(200).json({ message: "Content added to chatroom", newContent });
+    // res.end();
+    return;
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Something went wrong" });
   }
 });
