@@ -39,9 +39,6 @@ router.post("/:id", async (req: Request, res: Response) => {
 
     chat.contents.push(newContent.id);
     await chat.save();
-    // res.status(200).render("pages/chats/chatroom", { chat });
-    // res.status(200).json({ message: "Content added to chatroom", newContent });
-    // res.end();
     return;
   } catch (error) {
     console.error(error);
