@@ -12,39 +12,7 @@
   <div class="messageContainer">
     <form action="/chats/:id" method="POST">
       <input class="messageContainer__input" type="text" name="content" />
-      <button
-        class="messageContainer__submit"
-        type="submit"
-        onclick="{displayNewText}"
-      >
-        Send
-      </button>
+      <button class="messageContainer__submit" type="submit">Send</button>
     </form>
   </div>
 </div>
-
-<script>
-  //   const handleSubmit = async () => {
-  // await fetch
-  // const newMessage = document.querySelector(".messageContainer__input")
-  // const post = fetch('http://localhost:/chats/:id', {
-  // method: "POST",
-  // headers: {"Content-Type application/json"},
-  // body: JSON.stringfy(newMessage)
-  // })
-  // const response = await post.json()
-  // if the response.status = 200 or status.ok
-  // Manipulate the DOM
-  // displayNewText("new message")
-  // else
-  // Display to user an error -> The message was not sent. Try again later.
-  //   };
-
-  const displayNewText = () => {
-    const ul = document.querySelector(".timeLine");
-    const inputText = document.createElement("li");
-    inputText.innerHTML = input.value;
-    console.log("send clicked", inputText);
-    ul.appendChild(inputText);
-  };
-</script>

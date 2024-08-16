@@ -24,7 +24,7 @@
     });
 
     document.querySelector("button").onclick = () => {
-      const text = document.querySelector("input").value;
+      const text = document.querySelector(".messageContainer__input").value;
       socket.emit("message", text);
     };
   </script>
