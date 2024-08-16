@@ -9,11 +9,14 @@ export const renderChatsPage = async (req: Request, res: Response) => {
   try {
     const categories = await Category.find({});
     const chats = await Chat.find({});
+    const user = req.session!.currentUser;
+
     res.status(200).render("pages/chats/chat", {
       error: null,
       title: "chat",
       categories,
       chats,
+      user,
     });
   } catch (error) {
     console.error("cannot enter the room", error);
@@ -47,5 +50,3 @@ export const renderChatroomPage = async (req: Request, res: Response) => {
     res.json({ message: "error" });
   }
 };
-
-`Schema hasn't been registered for model "User".\nUse mongoose.model(name, schema)`;
