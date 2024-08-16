@@ -27,7 +27,6 @@ router.post("/:id", async (req: Request, res: Response) => {
       userId: userId,
       content: req.body.content,
     });
-    console.log(req.body.content);
 
     const newContent = await content.save();
 

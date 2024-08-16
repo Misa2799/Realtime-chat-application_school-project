@@ -25,10 +25,17 @@ io.on("connection", (socket) => {
   console.log("User connected");
 
   socket.on("message", (message) => {
-    console.log("message", message);
-    // io.emit("message", `${socket.id} said ${message}`);
     io.emit("message", message);
   });
+
+  // Broadcast the user's name and a message to all others when the user is typing
+  socket.on("typing", (userName) => {
+    socket.broadcast.emit("typing", userName);
+  });
+
+  // socket.on("typing", () => {
+  //   socket.broadcast.emit("typing", socket.id);
+  // });
 });
 
 // setup ejs
