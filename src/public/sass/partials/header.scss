@@ -26,7 +26,24 @@ header {
     .nav {
         a {
             font-size: 1.5rem;
-            padding: 0 20px;
+            // padding: 0 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            color: black;
+            background-color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-right: 40px;
+          
+            &:hover {
+              background-color: #0056b3;
+            }
+          
+            &:active {
+              background-color: #003d7a;
+            }
         }
     }
 

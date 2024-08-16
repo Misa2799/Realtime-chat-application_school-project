@@ -26,7 +26,8 @@ io.on("connection", (socket) => {
 
   socket.on("message", (message) => {
     console.log("message", message);
-    io.emit("message", `${socket.id} said ${message}`);
+    // io.emit("message", `${socket.id} said ${message}`);
+    io.emit("message", message);
   });
 });
 
@@ -50,13 +51,13 @@ app.use(
   cookieSession({
     name: "session",
     keys: ["secret key1", "key1"],
-    maxAge: 1000 * 60 * 30
+    maxAge: 1000 * 60 * 30,
   })
 );
-  // app.use((req: Request,res: Response,next: NextFunction)=>{
-  //   console.log(req.session);
-  //   next();
-  // })
+// app.use((req: Request,res: Response,next: NextFunction)=>{
+//   console.log(req.session);
+//   next();
+// })
 
 // app.use(`${baseUrl}`, productsRouter);
 app.use("/", indexRouter);
@@ -66,5 +67,3 @@ app.use("/chats", chatsRouter);
 app.all("*", (req: Request, res: Response) => {
   res.status(404).json({ error: "Not Found Route" });
 });
-
-
