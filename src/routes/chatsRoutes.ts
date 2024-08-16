@@ -14,7 +14,7 @@ export const router = Router();
 router.get("/", validateUser, renderChatsPage);
 
 // http://localhost:3000/chats
-router.post("/", redirectChat);
+router.post("/", validateUser, redirectChat);
 
 // http://localhost:3000/chats/:id
 router.get("/:id", validateUser, renderChatroomPage);
