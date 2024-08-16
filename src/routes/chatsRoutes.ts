@@ -8,8 +8,6 @@ import { validateUser } from "../middleware/validate-user";
 
 export const router = Router();
 
-router.get("/",validateUser,  renderChatsPage);
-router.post("/", validateUser,  renderChatroomPage);
-router.post("/", redirectChat);
+router.get("/", validateUser, renderChatsPage);
+router.post("/", validateUser, redirectChat);
 router.get("/:id", renderChatroomPage);
-
