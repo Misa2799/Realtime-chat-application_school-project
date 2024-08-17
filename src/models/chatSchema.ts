@@ -1,40 +1,34 @@
-import mongoose, { model, Schema } from "mongoose";
-import { IUser, User } from "./userSchema";
-import { Category } from "./categorySchema";
-import { Content, IContents } from "./contentSchema";
+import { Model, model, Schema } from "mongoose";
 
-export interface chatType {
-  users: IUser[];
+export type ChatType = {
+  users: Schema.Types.ObjectId[];
   categories: Schema.Types.ObjectId[];
-  contents: IContents[];
+  contents: Schema.Types.ObjectId[];
   name: string;
 };
 
-export const chatSchema = new mongoose.Schema<chatType>({
+//?
+type ChatModel = Model<ChatType>;
+
+export const chatSchema = new Schema<ChatType, ChatModel>({
   users: [
     {
-      type: Schema.Types.ObjectId,
+      type: [Schema.Types.ObjectId],
       ref: "User",
     },
   ],
-  categories: [
-    {
-      type: Schema.Types.ObjectId,
+  categories: {
+      type: [Schema.Types.ObjectId],
       ref: "Category",
-      required: true,
     },
-  ],
-  contents: [
-    {
-      type: Schema.Types.ObjectId,
+  contents: {
+      type: [Schema.Types.ObjectId],
       ref: "Content",
-      required: true,
     },
-  ],
   name: {
     type: String,
     required: true,
   },
-});
+},{timestamps:true, versionKey: false});
 
-export const Chat = mongoose.model<chatType>("Chat", chatSchema);
+export const Chat = model<ChatType, ChatModel>("Chat", chatSchema);

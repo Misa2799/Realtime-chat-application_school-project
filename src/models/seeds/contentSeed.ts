@@ -4,11 +4,11 @@ import { Content } from "../contentSchema";
 
 const contentData = [
   {
-    userId: new Types.ObjectId("66be30c61a4218de3999eaec"),
+    userId: new Types.ObjectId("66c028f08040dcc6cad39378"),
     content: "first message",
   },
   {
-    userId: new Types.ObjectId("66be30c61a4218de3999eaed"),
+    userId: new Types.ObjectId("66c028f08040dcc6cad39379"),
     content: "second message",
   },
 ];

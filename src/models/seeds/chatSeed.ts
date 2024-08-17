@@ -1,18 +1,18 @@
 import mongoose, { Types } from "mongoose";
 import { dbUrl } from "../..";
-import { Chat, chatType } from "../chatSchema";
+import { Chat, ChatType } from "../chatSchema";
 import { User } from "../userSchema";
 
 const chatData = [
   {
     users: [
-      new Types.ObjectId("66be30c61a4218de3999eaed"),
-      new Types.ObjectId("66be30c61a4218de3999eaec"),
+      new Types.ObjectId("66c028f08040dcc6cad39378"),
+      new Types.ObjectId("66c028f08040dcc6cad39379"),
     ],
-    categories: [new Types.ObjectId("66bda42a2ba998eed36e3aeb")],
+    categories: [new Types.ObjectId("66c028a2521ad6c592d7087a")],
     contents: [
-      new Types.ObjectId("66be3156a7756ff9e26ec724"),
-      new Types.ObjectId("66be3156a7756ff9e26ec725"),
+      new Types.ObjectId("66c029560c2efa6cd991148c"),
+      new Types.ObjectId("66c029560c2efa6cd991148d"),
     ],
     name: "room1",
   },

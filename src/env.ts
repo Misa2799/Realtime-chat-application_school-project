@@ -7,3 +7,4 @@ export const PATH = path.join(__dirname, `../.env.${ENV}`);
 config({ path: PATH });
 
 export const PORT = process.env.PORT || 3000;
+export const MONGO_URI = process.env.DATABASE_PATH;
