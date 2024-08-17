@@ -1,13 +1,15 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Model, Schema, model } from "mongoose";
 
-export interface IContents {
-  userId: Schema.Types.ObjectId;
+export interface ContentType {
+  sender: Schema.Types.ObjectId;
   content: string;
 }
 
-const contentSchema = new Schema<IContents>(
+type ContentModel = Model<ContentType>;
+
+const contentSchema = new Schema<ContentType, ContentModel>(
   {
-    userId: {
+    sender: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
@@ -17,7 +19,7 @@ const contentSchema = new Schema<IContents>(
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true, versionKey: false }
 );
 
-export const Content = model<IContents>("Content", contentSchema);
+export const Content = mongoose.model<ContentType, ContentModel>("Content", contentSchema);

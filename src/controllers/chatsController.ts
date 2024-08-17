@@ -3,6 +3,7 @@ import { User } from "../models/userSchema";
 import { Category } from "../models/categorySchema";
 import { Chat } from "../models/chatSchema";
 import { Content } from "../models/contentSchema";
+import { log } from "console";
 
 // Link to the chats page
 export const renderChatsPage = async (req: Request, res: Response) => {
@@ -34,11 +35,17 @@ export const renderChatroomPage = async (req: Request, res: Response) => {
 
   try {
     const chat = await Chat.findById(id)
-      .populate("users", "", User)
-      .populate("categories")
-      .populate("contents", "", Content)
-      .lean()
-      .exec();
+    .populate("users contents categories")
+    .populate({
+      path: "contents",
+      populate: {
+        path: "sender"
+      }
+    })
+    
+    console.log("chat::",chat);
+    
+      
 
     if (!chat) {
       res.status(404).render("pages/not-found");

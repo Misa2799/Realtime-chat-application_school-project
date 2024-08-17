@@ -7,6 +7,12 @@
         <p id="name">Yusuke</p>
         <p id="message">TextTextTextTextTextTextTextTextTextTextTextTextText</p>
       </li>
+      <% chat.contents.forEach(content => { %>
+       <li>
+        <p id="name"><%= content.sender.name %></p>
+        <p id="message"><%= content.content %></p>
+       </li>
+      <% }) %>
     </ul>
   </div>
   <div class="messageContainer">

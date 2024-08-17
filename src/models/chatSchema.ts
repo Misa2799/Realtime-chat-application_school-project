@@ -1,40 +1,34 @@
-import { model, Schema } from "mongoose";
-import { User } from "./userSchema";
-import { Category } from "./categorySchema";
-import { Content } from "./contentSchema";
+import { Model, model, Schema } from "mongoose";
 
-export type chatType = {
+export type ChatType = {
   users: Schema.Types.ObjectId[];
   categories: Schema.Types.ObjectId[];
   contents: Schema.Types.ObjectId[];
   name: string;
 };
 
-export const chatSchema = new Schema<chatType>({
+//?
+type ChatModel = Model<ChatType>;
+
+export const chatSchema = new Schema<ChatType, ChatModel>({
   users: [
     {
-      type: Schema.Types.ObjectId,
+      type: [Schema.Types.ObjectId],
       ref: "User",
     },
   ],
-  categories: [
-    {
-      type: Schema.Types.ObjectId,
+  categories: {
+      type: [Schema.Types.ObjectId],
       ref: "Category",
-      required: true,
     },
-  ],
-  contents: [
-    {
-      type: Schema.Types.ObjectId,
+  contents: {
+      type: [Schema.Types.ObjectId],
       ref: "Content",
-      required: true,
     },
-  ],
   name: {
     type: String,
     required: true,
   },
-});
+},{timestamps:true, versionKey: false});
 
-export const Chat = model<chatType>("Chat", chatSchema);
+export const Chat = model<ChatType, ChatModel>("Chat", chatSchema);
