@@ -1,12 +1,12 @@
 import mongoose, { model, Schema } from "mongoose";
-import { User } from "./userSchema";
+import { IUser, User } from "./userSchema";
 import { Category } from "./categorySchema";
-import { Content } from "./contentSchema";
+import { Content, IContents } from "./contentSchema";
 
-export type chatType = {
-  users: Schema.Types.ObjectId[];
+export interface chatType {
+  users: IUser[];
   categories: Schema.Types.ObjectId[];
-  contents: Schema.Types.ObjectId[];
+  contents: IContents[];
   name: string;
 };
 
