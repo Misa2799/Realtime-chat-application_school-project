@@ -32,10 +32,6 @@ io.on("connection", (socket) => {
   socket.on("typing", (userName) => {
     socket.broadcast.emit("typing", userName);
   });
-
-  // socket.on("typing", () => {
-  //   socket.broadcast.emit("typing", socket.id);
-  // });
 });
 
 // setup ejs
