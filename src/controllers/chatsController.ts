@@ -35,17 +35,18 @@ export const renderChatroomPage = async (req: Request, res: Response) => {
 
   try {
     const chat = await Chat.findById(id)
-    .populate("users", "", User)
-    .populate("categories")
-    .populate("contents", "", Content)
-    .lean()
-    .exec();
-
+    .populate("users contents categories")
+      .populate({
+        path: "contents",
+        populate: {
+          path: "sender"
+        }
+      })
     //content.userIdがcontent.senderになってしまっているから？
-    const chatHistories = chat?.contents.map(content => {
-      const chatHistory = chat.users.find(user => user._id === content.userId)
-      return chatHistory
-    })
+    // const chatHistories = chat?.contents.map(content => {
+    //   const chatHistory = chat.users.find(user => user._id === content.userId)
+    //   return chatHistory
+    // })
 
     const contentsData = chat?.contents;
     const userData = chat?.users;
