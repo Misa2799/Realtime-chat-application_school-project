@@ -1,5 +1,5 @@
 
-import mongoose from "mongoose"; 
+import mongoose, { Schema } from "mongoose"; 
 
 
 const userSchema = new mongoose.Schema({
@@ -17,5 +17,12 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+export interface IUser {
+  _id: mongoose.Types.ObjectId;
+  name: string;
+  email: string;
+  password: string;
+}
 
 export const User = mongoose.model("User", userSchema);

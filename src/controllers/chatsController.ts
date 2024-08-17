@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { User } from "../models/userSchema";
 import { Category } from "../models/categorySchema";
 import { Chat } from "../models/chatSchema";
+import { User } from "../models/userSchema";
 import { Content } from "../models/contentSchema";
 
 // Link to the chats page
@@ -16,7 +16,7 @@ export const renderChatsPage = async (req: Request, res: Response) => {
       title: "chat",
       categories,
       chats,
-      user,
+      user
     });
   } catch (error) {
     console.error("cannot enter the room", error);
@@ -34,11 +34,20 @@ export const renderChatroomPage = async (req: Request, res: Response) => {
 
   try {
     const chat = await Chat.findById(id)
-      .populate("users", "", User)
-      .populate("categories")
-      .populate("contents", "", Content)
-      .lean()
-      .exec();
+    .populate("users contents categories")
+    .populate({
+      path: "contents",
+      populate: {
+        path: "sender"
+      }
+    })
+
+      // const chatHistories = chat?.users._id;
+      // console.log('contents:', chatHistories);
+
+      // const chatHistories = chat?.contents.map((content) => {
+      //   chat.users.find((user) => user._id === content)
+      // })
 
     if (!chat) {
       res.status(404).render("pages/not-found");

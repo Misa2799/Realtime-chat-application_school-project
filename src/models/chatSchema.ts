@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import mongoose, { model, Schema } from "mongoose";
 import { User } from "./userSchema";
 import { Category } from "./categorySchema";
 import { Content } from "./contentSchema";
@@ -10,7 +10,7 @@ export type chatType = {
   name: string;
 };
 
-export const chatSchema = new Schema<chatType>({
+export const chatSchema = new mongoose.Schema<chatType>({
   users: [
     {
       type: Schema.Types.ObjectId,
@@ -37,4 +37,4 @@ export const chatSchema = new Schema<chatType>({
   },
 });
 
-export const Chat = model<chatType>("Chat", chatSchema);
+export const Chat = mongoose.model<chatType>("Chat", chatSchema);

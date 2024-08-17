@@ -1,11 +1,11 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 export interface IContents {
   userId: Schema.Types.ObjectId;
   content: string;
 }
 
-const contentSchema = new Schema<IContents>(
+const contentSchema = new mongoose.Schema<IContents>(
   {
     userId: {
       type: Schema.Types.ObjectId,
@@ -20,4 +20,4 @@ const contentSchema = new Schema<IContents>(
   { timestamps: true }
 );
 
-export const Content = model<IContents>("Content", contentSchema);
+export const Content = mongoose.model<IContents>("Content", contentSchema);
