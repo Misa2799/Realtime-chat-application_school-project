@@ -13,7 +13,13 @@
   <div class="messageContainer">
     <p class="userName hidden"><%= userName %></p>
     <form action="/chats/<%= chat._id%>" method="POST">
-      <input class="messageContainer__input" type="text" name="content" />
+      <input
+        class="messageContainer__input"
+        type="text"
+        name="content"
+        placeholder="message..."
+        required
+      />
       <button class="messageContainer__submit" type="submit">Send</button>
     </form>
   </div>

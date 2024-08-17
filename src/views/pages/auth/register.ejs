@@ -1,12 +1,6 @@
 <register>
   <div class="register-container">
     <form class="register-form" action="/auth/register" method="post">
-      <!-- <% if (typeof error !== 'undefined') { %>
-      <script>
-        alert("<%= error %>");
-      </script>
-      <% } %> -->
-
       <h2>Register</h2>
       <div class="form-group">
         <label for="name">Name</label>
@@ -42,5 +36,6 @@
         <button type="submit">Register</button>
       </div>
     </form>
+    <div class="error-message"><%= error %></div>
   </div>
 </register>
