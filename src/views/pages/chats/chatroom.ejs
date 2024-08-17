@@ -10,8 +10,14 @@
     </ul>
   </div>
   <div class="messageContainer">
-    <form action="/chats/:id" method="post">
-      <input class="messageContainer__input" type="text" />
+    <form action="/chats/<%= chat._id%>" method="POST">
+      <input
+        class="messageContainer__input"
+        type="text"
+        name="content"
+        placeholder="message..."
+        required
+      />
       <button class="messageContainer__submit" type="submit">Send</button>
     </form>
   </div>
