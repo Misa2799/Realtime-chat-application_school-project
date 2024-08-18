@@ -36,17 +36,15 @@ export const renderChatroomPage = async (req: Request, res: Response) => {
 
   try {
     const chat = await Chat.findById(id)
-    .populate("users contents categories")
-    .populate({
-      path: "contents",
-      populate: {
-        path: "sender"
-      }
-    })
-    
-    console.log("chat::",chat);
-    
-      
+      .populate("users contents categories")
+      .populate({
+        path: "contents",
+        populate: {
+          path: "sender",
+        },
+      });
+
+    console.log("chat::", chat);
 
     if (!chat) {
       res.status(404).render("pages/not-found");
@@ -56,5 +54,31 @@ export const renderChatroomPage = async (req: Request, res: Response) => {
   } catch (error) {
     console.error("cannot enter the room", error);
     res.json({ message: "error" });
+  }
+};
+
+export const sendMsgToDB = async (req: Request, res: Response) => {
+  try {
+    const userId = req.session?.currentUser?.id;
+
+    const content = new Content({
+      sender: userId,
+      content: req.body.content,
+    });
+
+    const newContent = await content.save();
+
+    const chat = await Chat.findById(req.params.id);
+
+    if (!chat) {
+      return res.status(404).json({ error: "Chatroom not found" });
+    }
+
+    chat.contents.push(newContent.id);
+    await chat.save();
+    return;
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Something went wrong" });
   }
 };
