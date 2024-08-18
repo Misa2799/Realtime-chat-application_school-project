@@ -3,6 +3,7 @@ import {
   redirectChat,
   renderChatroomPage,
   renderChatsPage,
+  sendMsgToDB,
 } from "../controllers/chatsController";
 import { Content } from "../models/contentSchema";
 import { validateUser } from "../middleware/validate-user";
@@ -19,28 +20,4 @@ router.post("/", validateUser, redirectChat);
 // http://localhost:3000/chats/:id
 router.get("/:id", validateUser, renderChatroomPage);
 
-router.post("/:id", async (req: Request, res: Response) => {
-  try {
-    const userId = req.session?.currentUser?.id;
-
-    const content = new Content({
-      sender: userId,
-      content: req.body.content,
-    });
-
-    const newContent = await content.save();
-
-    const chat = await Chat.findById(req.params.id);
-
-    if (!chat) {
-      return res.status(404).json({ error: "Chatroom not found" });
-    }
-
-    chat.contents.push(newContent.id);
-    await chat.save();
-    return;
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Something went wrong" });
-  }
-});
+router.post("/:id", validateUser, sendMsgToDB);

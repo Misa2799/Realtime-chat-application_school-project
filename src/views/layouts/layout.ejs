@@ -15,14 +15,24 @@
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    const socket = io("ws://localhost:3000");
+    const socket = io();
 
     const userName = document.querySelector(".userName").innerHTML;
-    console.log("userName in layout:", userName);
 
-    socket.on("message", (text) => {
+    socket.on("message", (userName, message) => {
       const li = document.createElement("li");
-      li.innerHTML = text;
+      const pName = document.createElement("p");
+      const pMsg = document.createElement("p");
+
+      pName.id = "name";
+      pMsg.id = "message";
+
+      pName.innerHTML = userName;
+      pMsg.innerHTML = message;
+
+      li.appendChild(pName);
+      li.appendChild(pMsg);
+
       document.querySelector("ul").appendChild(li);
     });
 
@@ -30,10 +40,14 @@
 
     document.querySelector("button").onclick = () => {
       if (input.value) {
-        socket.emit("message", input.value);
-        // input.value = "";
+        socket.emit("message", userName, input.value, (response) => {
+          if (response.status === "success") {
+            input.value = "";
+          } else {
+            console.error("Failed to send the message");
+          }
+        });
       }
-      input.focus();
     };
 
     input.addEventListener("input", () => {
@@ -44,7 +58,6 @@
     socket.on("typing", (userName) => {
       const activity = document.querySelector(".activity");
       activity.textContent = `${userName} is typing...`;
-      // want to pass a user name instead of userId
 
       setTimeout(() => {
         activity.textContent = "";
