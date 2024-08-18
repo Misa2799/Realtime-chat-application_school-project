@@ -3,12 +3,8 @@
 <div class="globalContainer">
   <div class="chatContainer">
     <ul class="timeLine">
-      <li class="timeLine__list">
-        <p id="name">Yusuke</p>
-        <p id="message">TextTextTextTextTextTextTextTextTextTextTextTextText</p>
-      </li>
       <% chat.contents.forEach(content => { %>
-      <li>
+      <li class="timeLine__list">
         <p id="name"><%= content.sender.name %></p>
         <p id="message"><%= content.content %></p>
       </li>
