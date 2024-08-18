@@ -44,8 +44,6 @@ export const renderChatroomPage = async (req: Request, res: Response) => {
         },
       });
 
-    console.log("chat::", chat);
-
     if (!chat) {
       res.status(404).render("pages/not-found");
     }
