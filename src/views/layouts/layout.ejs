@@ -17,19 +17,38 @@
   <script>
     const socket = io("ws://localhost:3000");
 
+    const userName = document.querySelector(".userName").innerHTML;
+    console.log("userName in layout:", userName);
+
     socket.on("message", (text) => {
       const li = document.createElement("li");
       li.innerHTML = text;
       document.querySelector("ul").appendChild(li);
     });
 
+    const input = document.querySelector(".messageContainer__input");
+
     document.querySelector("button").onclick = () => {
-      const input = document.querySelector(".messageContainer__input");
       if (input.value) {
         socket.emit("message", input.value);
         // input.value = "";
       }
       input.focus();
     };
+
+    input.addEventListener("input", () => {
+      socket.emit("typing", userName);
+    });
+
+    // display a message to all others when a user is typing
+    socket.on("typing", (userName) => {
+      const activity = document.querySelector(".activity");
+      activity.textContent = `${userName} is typing...`;
+      // want to pass a user name instead of userId
+
+      setTimeout(() => {
+        activity.textContent = "";
+      }, 3000);
+    });
   </script>
 </html>

@@ -32,6 +32,7 @@ export const redirectChat = async (req: Request, res: Response) => {
 
 export const renderChatroomPage = async (req: Request, res: Response) => {
   const { id } = req.params;
+  const userName = req.session!.currentUser.name;
 
   try {
     const chat = await Chat.findById(id)
@@ -51,7 +52,7 @@ export const renderChatroomPage = async (req: Request, res: Response) => {
       res.status(404).render("pages/not-found");
     }
 
-    res.status(200).render(`pages/chats/chatroom`, { chat });
+    res.status(200).render(`pages/chats/chatroom`, { chat, userName });
   } catch (error) {
     console.error("cannot enter the room", error);
     res.json({ message: "error" });
