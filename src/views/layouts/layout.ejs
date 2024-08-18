@@ -15,7 +15,7 @@
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    const socket = io("ws://localhost:3000");
+    const socket = io();
 
     const userName = document.querySelector(".userName").innerHTML;
     console.log("userName in layout:", userName);
