@@ -29,8 +29,6 @@
 
       pName.innerHTML = userName;
       pMsg.innerHTML = message;
-      console.log("userName::", userName);
-      console.log("pMsg", pMsg);
 
       li.appendChild(pName);
       li.appendChild(pMsg);
@@ -42,8 +40,13 @@
 
     document.querySelector("button").onclick = () => {
       if (input.value) {
-        socket.emit("message", userName, input.value);
-        // input.value = "";
+        socket.emit("message", userName, input.value, (response) => {
+          if (response.status === "success") {
+            input.value = "";
+          } else {
+            console.error("Failed to send the message");
+          }
+        });
       }
     };
 
@@ -55,7 +58,6 @@
     socket.on("typing", (userName) => {
       const activity = document.querySelector(".activity");
       activity.textContent = `${userName} is typing...`;
-      // want to pass a user name instead of userId
 
       setTimeout(() => {
         activity.textContent = "";
