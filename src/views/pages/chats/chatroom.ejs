@@ -8,10 +8,10 @@
         <p id="message">TextTextTextTextTextTextTextTextTextTextTextTextText</p>
       </li>
       <% chat.contents.forEach(content => { %>
-       <li>
+      <li>
         <p id="name"><%= content.sender.name %></p>
         <p id="message"><%= content.content %></p>
-       </li>
+      </li>
       <% }) %>
     </ul>
     <p class="activity"></p>
@@ -25,6 +25,7 @@
         name="content"
         placeholder="message..."
         required
+        autofocus
       />
       <button class="messageContainer__submit" type="submit">Send</button>
     </form>
