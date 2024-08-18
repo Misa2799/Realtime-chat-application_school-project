@@ -24,8 +24,8 @@ io.on("connection", (socket) => {
 io.on("connection", (socket) => {
   console.log("User connected");
 
-  socket.on("message", (message) => {
-    io.emit("message", message);
+  socket.on("message", (userName, message) => {
+    io.emit("message", userName, message); // how to pass username here
   });
 
   // Broadcast the user's name and a message to all others when the user is typing
