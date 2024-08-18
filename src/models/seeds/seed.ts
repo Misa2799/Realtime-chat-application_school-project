@@ -16,47 +16,47 @@ const main = async () => {
     {
       name: "user1",
       email: "bart@gmail.com",
-      password: "$2b$10$VN2e9Gpczf6yELYPy3OIwekgRD29OnJZfYlaNK6H/wQuurAoymmq2"
+      password: "$2b$10$VN2e9Gpczf6yELYPy3OIwekgRD29OnJZfYlaNK6H/wQuurAoymmq2",
     },
     {
       name: "user2",
       email: "user2@example.com",
-      password: "$2b$10$VN2e9Gpczf6yELYPy3OIwekgRD29OnJZfYlaNK6H/wQuurAoymmq2"
-    }
+      password: "$2b$10$VN2e9Gpczf6yELYPy3OIwekgRD29OnJZfYlaNK6H/wQuurAoymmq2",
+    },
   ]);
 
   const categories = await Category.insertMany([
     {
-      title: "HOME"
+      title: "HOME",
     },
     {
-      title: "SCHOOL"
+      title: "SCHOOL",
     },
     {
-      title: "WORK"
-    }
+      title: "WORK",
+    },
   ]);
 
   const contents = await Content.insertMany([
     {
       sender: users[0]._id,
-      content: "First Message"
+      content: "First Message",
     },
     {
       sender: users[1]._id,
-      content: "Second Message"
+      content: "Second Message",
     },
     {
       sender: users[1]._id,
-      content: "Hi, I think so, it populates well"
-    }
+      content: "Hi, I think so, it populates well",
+    },
   ]);
 
   const chats = await Chat.insertMany([
     {
       users: [
         new Types.ObjectId(users[0]._id),
-        new Types.ObjectId(users[1]._id)
+        new Types.ObjectId(users[1]._id),
       ],
       categories: categories.map(
         (category) => new Types.ObjectId(category._id)
@@ -65,39 +65,25 @@ const main = async () => {
       contents: [
         new Types.ObjectId(contents[0]._id),
         new Types.ObjectId(contents[1]._id),
-        new Types.ObjectId(contents[2]._id)
-      ]
+        new Types.ObjectId(contents[2]._id),
+      ],
     },
     {
-        users: [
-          new Types.ObjectId(users[0]._id),
-          new Types.ObjectId(users[1]._id)
-        ],
-        categories: categories.map(
-          (category) => new Types.ObjectId(category._id)
-        ),
-        name: "ROOM 2",
-        contents: [
-          new Types.ObjectId(contents[0]._id),
-          new Types.ObjectId(contents[1]._id),
-          new Types.ObjectId(contents[2]._id)
-        ]
-      },
-      {
-        users: [
-          new Types.ObjectId(users[0]._id),
-          new Types.ObjectId(users[1]._id)
-        ],
-        categories: categories.map(
-          (category) => new Types.ObjectId(category._id)
-        ),
-        name: "ROOM 3",
-        contents: [
-          new Types.ObjectId(contents[0]._id),
-          new Types.ObjectId(contents[1]._id),
-          new Types.ObjectId(contents[2]._id)
-        ]
-      }
+      users: [],
+      categories: categories.map(
+        (category) => new Types.ObjectId(category._id)
+      ),
+      name: "ROOM 2",
+      contents: [],
+    },
+    {
+      users: [],
+      categories: categories.map(
+        (category) => new Types.ObjectId(category._id)
+      ),
+      name: "ROOM 3",
+      contents: [],
+    },
   ]);
 
   const populatedChat = await Chat.findById(chats[0]._id).populate(
