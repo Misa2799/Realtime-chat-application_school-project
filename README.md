@@ -1,4 +1,6 @@
-# Midterm Project Instructions: Building an E-Commerce Website
+# This is one of my team project in [Cornerstone International Community College of Canada](https://ciccc.ca/).
+
+# Midterm Project Instructions: Building Real-time chat application
 
 ## Objective
 
